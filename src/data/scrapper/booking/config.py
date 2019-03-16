@@ -1,4 +1,5 @@
-FILE_DIRECTORY="./"
+CITIES_PATH = "../../../../data/interim/cities.csv"
+SCRAPPING_DIRECTORY = "../../../../data/raw"
 ALLOWED_DOMAINS = ['booking.com']
 BASE_URL = "https://www.booking.com"
 HEADERS = {
@@ -6,3 +7,4 @@ HEADERS = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
     "Host": "www.booking.com"
 }
+PROCESS_COUNT = 16
