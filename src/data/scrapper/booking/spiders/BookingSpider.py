@@ -1,9 +1,10 @@
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 import pandas as pd
 import scrapy
 import config as conf
 from scrapy.http.request import Request
+import DateHelper as dh
 
 
 def parse_url(response):
@@ -41,10 +42,12 @@ class BookingSpider(scrapy.Spider):
         super().__init__(**kwargs, name=self.__name)
         self.__date = date
         self.__stay_length = stay_length
-        self.__column_name = "price_" + column_name
+        self.__price_column_name = "price_" + column_name
+        self.__day_of_week_column_name = "day_of_week_" + column_name
         self.__end_date = self.__date + timedelta(days=self.__stay_length)
         self.__city = city
-        self.result_data_frame = pd.DataFrame(columns=['hotel_id', 'name', 'score', self.__column_name])
+        self.result_data_frame = pd.DataFrame(
+            columns=['hotel_id', 'name', 'score', self.__price_column_name, self.__day_of_week_column_name])
 
     def start_requests(self):
         yield Request(
@@ -70,7 +73,8 @@ class BookingSpider(scrapy.Spider):
                     'hotel_id': hotel_id,
                     'name': body.css('h3.sr-card__name::text').extract_first().strip(),
                     'score': score,
-                    self.__column_name: price
+                    self.__day_of_week_column_name: dh.day_of_week(),
+                    self.__price_column_name: price
                 }, ignore_index=True)
         if url is not None:
             yield Request(url='{}{}'.format(conf.BASE_URL, url), headers=conf.HEADERS, callback=self.parse)

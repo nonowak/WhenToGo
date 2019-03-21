@@ -7,4 +7,4 @@ HEADERS = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
     "Host": "www.booking.com"
 }
-PROCESS_COUNT = 16
+PROCESS_COUNT = 4
