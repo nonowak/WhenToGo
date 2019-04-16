@@ -1,5 +1,7 @@
-CITIES_PATH = "../../../../data/interim/cities.csv"
-SCRAPPING_DIRECTORY = "../../../../data/raw"
+DEFAULT_DIRECTORY = "/home/nnowak/WhenToGo"
+CITIES_PATH = "{}/data/interim/cities.csv".format(DEFAULT_DIRECTORY)
+SCRAPPING_DIRECTORY = "{}/raw".format(DEFAULT_DIRECTORY)
+SPIDERS_EXECUTIVE_DIRECTORY = "{}/src/data/scrapper/booking/SpidersExecutive.py".format(DEFAULT_DIRECTORY)
 ALLOWED_DOMAINS = ['booking.com']
 BASE_URL = "https://www.booking.com"
 HEADERS = {

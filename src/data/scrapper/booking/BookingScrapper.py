@@ -8,7 +8,7 @@ from notification.NotificationHandler import scan_directory
 #
 def run_spider(city):
     city = city.replace(' ', '+')
-    os.system("python3 SpidersExecutive.py {}".format(city))
+    os.system("python3 {} {}".format(conf.SPIDERS_EXECUTIVE_DIRECTORY, city))
 
 
 if __name__ == '__main__':
