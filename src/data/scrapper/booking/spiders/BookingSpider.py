@@ -73,7 +73,7 @@ class BookingSpider(scrapy.Spider):
                     'hotel_id': hotel_id,
                     'name': body.css('h3.sr-card__name::text').extract_first().strip(),
                     'score': score,
-                    self.__day_of_week_column_name: dh.day_of_week(),
+                    self.__day_of_week_column_name: dh.day_of_week(self.__date),
                     self.__price_column_name: price
                 }, ignore_index=True)
         if url is not None:

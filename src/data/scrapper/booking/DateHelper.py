@@ -8,9 +8,8 @@ def next_friday():
         d = d + timedelta(1)
     return d
 
-
-def day_of_week():
-    return datetime.today().weekday()
+def day_of_week(for_datetime = datetime.today()):
+    return for_datetime.weekday()
 
 def is_after_date(date):
     return datetime.now() > date
