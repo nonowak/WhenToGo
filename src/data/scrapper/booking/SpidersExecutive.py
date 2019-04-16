@@ -15,6 +15,7 @@ logging.getLogger('scrapy').propagate = False
 
 
 class SpidersExecutive:
+    RUNNING_SPIDERS = []
     result = pd.DataFrame(columns=['hotel_id', 'name', 'score'])
 
     def __init__(self, city):
@@ -29,15 +30,19 @@ class SpidersExecutive:
         self.result['day_of_week_scrapping'] = dh.day_of_week()
 
     def all_spiders_done(self):
-        self.add_day_of_week()
-        directory_path = "{}/{}".format(conf.SCRAPPING_DIRECTORY, self.__city)
-        self.prepare_directory(directory_path)
-        self.result.to_csv('{}/booking_days_{}_date_{}.csv'.format(directory_path,
-                                                                   self.__stay_length,
-                                                                   datetime.now().strftime("%Y-%m-%d_%H_%M")), sep=',')
+        if not self.RUNNING_SPIDERS:
+            self.add_day_of_week()
+            directory_path = "{}/{}".format(conf.SCRAPPING_DIRECTORY, self.__city)
+            self.prepare_directory(directory_path)
+            self.result.to_csv('{}/booking_days_{}_date_{}.csv'.format(directory_path,
+                                                                       self.__stay_length,
+                                                                       datetime.now().strftime("%Y-%m-%d_%H_%M")),
+                               sep=',')
 
     def spider_done(self, spider):
+        self.RUNNING_SPIDERS.remove(spider)
         self.result = pd.merge(self.result, spider.result_data_frame, on=['hotel_id', 'name', 'score'], how='outer')
+        self.all_spiders_done()
 
     def execute(self):
         start_time = datetime.now()
@@ -56,8 +61,8 @@ class SpidersExecutive:
         for process_name, date in date_columns.items():
             booking_crawler = Crawler(bs, get_project_settings())
             booking_crawler.signals.connect(self.spider_done, signals.spider_closed)
-            booking_crawler.signals.connect(self.all_spiders_done, signals.engine_stopped)
             spiders_executor.crawl(booking_crawler, column_name=process_name, date=date, city=self.__city)
+            self.RUNNING_SPIDERS.append(booking_crawler.spider)
         if len(spiders_executor.crawlers) < len(date_columns):
             print("Less crawlers than date_columns")
             self.execute()
