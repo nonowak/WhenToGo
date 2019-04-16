@@ -26,7 +26,7 @@ class SpidersExecutive:
         os.makedirs(directory_path, exist_ok=True)
 
     def add_day_of_week(self):
-        self.result['day_of_week'] = dh.day_of_week()
+        self.result['day_of_week_scrapping'] = dh.day_of_week()
 
     def all_spiders_done(self):
         self.add_day_of_week()
@@ -58,6 +58,9 @@ class SpidersExecutive:
             booking_crawler.signals.connect(self.spider_done, signals.spider_closed)
             booking_crawler.signals.connect(self.all_spiders_done, signals.engine_stopped)
             spiders_executor.crawl(booking_crawler, column_name=process_name, date=date, city=self.__city)
+        if len(spiders_executor.crawlers) < len(date_columns):
+            print("Less crawlers than date_columns")
+            self.execute()
         spiders_executor.start()
         print("Scrapping {} in {}s".format(self.__city, str((datetime.now() - start_time).seconds)))
 
