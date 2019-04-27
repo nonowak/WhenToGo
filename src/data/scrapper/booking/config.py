@@ -1,6 +1,6 @@
 DEFAULT_DIRECTORY = "/Users/norbertnowak/Files/Projects/Home/WhenToGo"
 CITIES_PATH = "{}/data/interim/cities.csv".format(DEFAULT_DIRECTORY)
-SCRAPPING_DIRECTORY = "{}/raw".format(DEFAULT_DIRECTORY)
+SCRAPPING_DIRECTORY = "{}/data/raw".format(DEFAULT_DIRECTORY)
 SPIDERS_EXECUTIVE_DIRECTORY = "{}/src/data/scrapper/booking/SpidersExecutive.py".format(DEFAULT_DIRECTORY)
 ALLOWED_DOMAINS = ['booking.com']
 BASE_URL = "https://www.booking.com"
@@ -9,4 +9,4 @@ HEADERS = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
     "Host": "www.booking.com"
 }
-PROCESS_COUNT = 4
+PROCESS_COUNT = 1
