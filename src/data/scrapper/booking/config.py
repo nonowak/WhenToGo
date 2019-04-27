@@ -1,4 +1,4 @@
-DEFAULT_DIRECTORY = "/home/nnowak/WhenToGo"
+DEFAULT_DIRECTORY = "/Users/norbertnowak/Files/Projects/Home/WhenToGo"
 CITIES_PATH = "{}/data/interim/cities.csv".format(DEFAULT_DIRECTORY)
 SCRAPPING_DIRECTORY = "{}/raw".format(DEFAULT_DIRECTORY)
 SPIDERS_EXECUTIVE_DIRECTORY = "{}/src/data/scrapper/booking/SpidersExecutive.py".format(DEFAULT_DIRECTORY)
