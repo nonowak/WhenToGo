@@ -1,7 +1,5 @@
-import bonobo
-import bonobo.config
-import bonobo.util
 import csv
+
 import config as conf
 import pandas as pd
 from bonobo.config import use
@@ -32,23 +30,24 @@ def get_hotel_ids():
 
 @use('hotel_ids')
 def transform_hotel(data, hotel_ids):
-    row = data['row']
-    hotel_id = int(row[1])
+    name = data['name']
+    hotel_id = int(data['hotel_id'])
+    score = data['score']
     if hotel_id not in hotel_ids:
         current_index = len(hotel_ids)
         hotel_ids.add(hotel_id)
-        hotel_name = row[2]
-        load(current_index, hotel_id, hotel_name, row[3])
+        load(current_index, hotel_id, name, score)
     yield {
         **data,
-        'hotel_id': hotel_id
+        'hotel': hotel_id
     }
 
 
-def load(hotel):
+def load(*hotel):
     with open(HOTELS_FILE_NAME, 'a') as f:
         writer = csv.writer(f)
         writer.writerow(hotel)
+
 
 def get_services():
     return {

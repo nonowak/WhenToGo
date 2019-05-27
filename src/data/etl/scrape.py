@@ -1,9 +1,9 @@
 import csv
-import config as conf
+
 import bonobo
-import price as p
 import bonobo.config
 import bonobo.util
+import config as conf
 
 SCRAPE_FILE_NAME = conf.PROCESSED_DATA_DIRECTORY + '/scrapes.csv'
 SCRAPE_INFO_FILE_NAME = conf.PROCESSED_DATA_DIRECTORY + '/scrape_info.csv'

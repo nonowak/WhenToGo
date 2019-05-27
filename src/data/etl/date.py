@@ -1,9 +1,9 @@
 import datetime
-import pandas as pd
-import config as conf
-import bonobo
+
 import bonobo.config
 import bonobo.util
+import config as conf
+import pandas as pd
 
 START_DATE = datetime.date(2019, 4, 17)
 END_DATE = datetime.date(2020, 4, 17)
@@ -40,5 +40,5 @@ def get_services():
 def transform_date(data, dates):
     yield {
         **data,
-        'date': list(dates.keys())[list(dates.values()).index(data['date'])]
+        'date_id': list(dates.keys())[list(dates.values()).index(data['scrape_date'])]
     }

@@ -35,5 +35,5 @@ def get_services():
 def transform_hour(data, hours):
     yield {
         **data,
-        'hour': list(hours.keys())[list(hours.values()).index(data['hour'])]
+        'hour_id': list(hours.keys())[list(hours.values()).index(data['scrape_hour'])]
     }

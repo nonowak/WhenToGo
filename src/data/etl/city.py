@@ -30,5 +30,5 @@ def get_services():
 def transform_city(data, cities):
     yield {
         **data,
-        'city': list(cities[1].keys())[list(cities[1].values()).index(data['city'])]
+        'city_id': list(cities[1].keys())[list(cities[1].values()).index(data['scrape_city'])]
     }

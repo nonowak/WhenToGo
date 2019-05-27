@@ -1,25 +1,18 @@
+def remove_currency(price):
+    return price[:-3]
+
+
 def transform_price(data):
-    row = data['row']
     yield {
         **data,
-        'price_new_year': row[4],
-        'day_of_week_new_year': row[5],
-        'price_spring': row[6],
-        'day_of_week_spring': row[7],
-        'price_weekend': row[8],
-        'day_of_week_weekend': row[9],
-        'price_one_month': row[10],
-        'day_of_week_one_month': row[11],
-        'price_winter': row[12],
-        'day_of_week_winter': row[13],
-        'price_today': row[14],
-        'day_of_week_today': row[15],
-        'price_autumn': row[16],
-        'day_of_week_autumn': row[17],
-        'price_five_months': row[18],
-        'day_of_week_five_months': row[19],
-        'price_three_months': row[20],
-        'day_of_week_three_months': row[21],
-        'price_summer': row[22],
-        'day_of_week_summer': row[23]
+        'price_new_year': remove_currency(data['price_new_year']),
+        'price_spring': remove_currency(data['price_spring']),
+        'price_weekend': remove_currency(data['price_weekend']),
+        'price_one_month': remove_currency(data['price_one_month']),
+        'price_winter': remove_currency(data['price_winter']),
+        'price_today': remove_currency(data['price_today']),
+        'price_autumn': remove_currency(data['price_autumn']),
+        'price_five_months': remove_currency(data['price_five_months']),
+        'price_three_months': remove_currency(data['price_three_months']),
+        'price_summer': remove_currency(data['price_summer']),
     }
