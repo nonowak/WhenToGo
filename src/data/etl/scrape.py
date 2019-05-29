@@ -5,15 +5,26 @@ import bonobo.config
 import bonobo.util
 import config as conf
 
-SCRAPE_FILE_NAME = conf.PROCESSED_DATA_DIRECTORY + '/scrapes.csv'
+SCRAPE_DICTIONARY = conf.PROCESSED_DATA_DIRECTORY + '/scrapes/{}_scrape.csv'
 SCRAPE_INFO_FILE_NAME = conf.PROCESSED_DATA_DIRECTORY + '/scrape_info.csv'
 
 
+def delete_unnecessary_keys(data):
+    [data.pop(k, None) for k in ('scrape_hour',
+                                 'scrape_city',
+                                 'scrape_date',
+                                 'score',
+                                 'name',
+                                 '')]
+    return data
+
+
 def load_scrape(data):
-    scrape = list(data.values())[1:]
-    with open(SCRAPE_FILE_NAME, 'a') as f:
+    city = data['scrape_city']
+    data = delete_unnecessary_keys(data)
+    with open(SCRAPE_DICTIONARY.format(city), 'a') as f:
         writer = csv.writer(f)
-        writer.writerow(scrape)
+        writer.writerow(data.values())
 
 
 def get_graph(graph=None):

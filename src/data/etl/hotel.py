@@ -31,15 +31,15 @@ def get_hotel_ids():
 @use('hotel_ids')
 def transform_hotel(data, hotel_ids):
     name = data['name']
-    hotel_id = int(data['hotel_id'])
+    data['hotel_id'] = int(data['hotel_id'])
+    hotel_id = data['hotel_id']
     score = data['score']
     if hotel_id not in hotel_ids:
         current_index = len(hotel_ids)
         hotel_ids.add(hotel_id)
         load(current_index, hotel_id, name, score)
     yield {
-        **data,
-        'hotel': hotel_id
+        **data
     }
 
 

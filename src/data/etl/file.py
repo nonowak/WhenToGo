@@ -1,7 +1,6 @@
 import csv
 import re
 
-
 def extract(name):
     with open(name) as f:
         reader = csv.DictReader(f)
