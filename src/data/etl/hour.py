@@ -34,6 +34,6 @@ def get_services():
 @bonobo.config.use('hours')
 def transform_hour(data, hours):
     yield {
-        **data,
+        'scrape_id': data['scrape_id'],
         'hour_id': list(hours.keys())[list(hours.values()).index(data['scrape_hour'])]
     }

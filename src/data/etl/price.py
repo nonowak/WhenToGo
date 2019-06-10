@@ -4,7 +4,7 @@ def remove_currency(price):
 
 def transform_price(data):
     yield {
-        **data,
+        'scrape_id': data['scrape_id'],
         'price_new_year': remove_currency(data['price_new_year']),
         'price_spring': remove_currency(data['price_spring']),
         'price_weekend': remove_currency(data['price_weekend']),

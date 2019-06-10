@@ -29,6 +29,7 @@ def get_services():
 @bonobo.config.use('cities')
 def transform_city(data, cities):
     yield {
-        **data,
+        'scrape_id': data['scrape_id'],
+        'scrape_city': data['scrape_city'],
         'city_id': list(cities[1].keys())[list(cities[1].values()).index(data['scrape_city'])]
     }

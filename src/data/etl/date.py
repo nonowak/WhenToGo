@@ -10,6 +10,7 @@ END_DATE = datetime.date(2020, 4, 17)
 DATES_FILE_NAME = conf.PROCESSED_DATA_DIRECTORY + '/dates.csv'
 
 
+
 def generate_dates():
     dates = pd.date_range(START_DATE, END_DATE).tolist()
     df = pd.DataFrame(dates)
@@ -39,6 +40,6 @@ def get_services():
 @bonobo.config.use('dates')
 def transform_date(data, dates):
     yield {
-        **data,
+        'scrape_id': data['scrape_id'],
         'date_id': list(dates.keys())[list(dates.values()).index(data['scrape_date'])]
     }
