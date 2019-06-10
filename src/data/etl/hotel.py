@@ -39,7 +39,8 @@ def transform_hotel(data, hotel_ids):
         hotel_ids.add(hotel_id)
         load(current_index, hotel_id, name, score)
     yield {
-        **data
+        'scrape_id': data['scrape_id'],
+        'hotel_id': hotel_id
     }
 
 
