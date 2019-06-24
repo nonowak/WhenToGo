@@ -7,7 +7,7 @@ import pandas as pd
 
 START_DATE = datetime.date(2019, 4, 17)
 END_DATE = datetime.date(2020, 4, 17)
-DATES_FILE_NAME = conf.PROCESSED_DATA_DIRECTORY + '/dates.csv'
+DATES_FILE_NAME = f'{conf.PROCESSED_DATA_DIRECTORY}/dates.csv'
 
 
 
