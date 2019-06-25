@@ -44,3 +44,5 @@ data/raw/
 src/data/etl/config\.py
 
 data/interim/scrapes/
+
+data/interim/etl/luigi/*
