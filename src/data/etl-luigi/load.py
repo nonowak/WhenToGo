@@ -26,9 +26,6 @@ class Load(luigi.WrapperTask):
             tp.TransformPrices(raw_data_filename=self.raw_data_filename)
         ]
 
-    def get_output_filename(self):
-        return f'{LUIGI_OUTPUT_DIRECTORY}/{self.city}/{self.city_date}'
-
     def prepare_local_variables(self, input_filename):
         if self.city_date == 'UNDEFINED.csv':
             self.city_date = cmn.get_city_date(input_filename)

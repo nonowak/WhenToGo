@@ -1,8 +1,6 @@
 import luigi
 import glob
 import config as conf
-import os
-import csv
 import re
 import pandas as pd
 import common as cmn
@@ -12,8 +10,10 @@ LUIGI_RAW_DIRECTORY = f'{conf.LUIGI_DIRECTORY}/raw'
 
 
 class ExtractRawFiles(luigi.Task):
+    city = luigi.Parameter('')
+
     def run(self):
-        for input_filename in glob.glob(f'{conf.RAW_DATA_DIRECTORY}/**/*.csv', recursive=True):
+        for input_filename in glob.glob(f'{conf.RAW_DATA_DIRECTORY}/{self.city}/*.csv', recursive=True):
             df = pd.read_csv(input_filename, index_col=0)
             if not df.empty:
                 scrape_date = input_filename[-20:-10]
